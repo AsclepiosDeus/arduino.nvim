@@ -16,8 +16,7 @@ function M.save_card_data()
   local lines = {
     '[board]',
     'core = "' .. (M.board_data.core or "") .. '"',
-    'fqnb = "' .. (M.board_data.fqnb or "") .. '"',
-    'port = "' .. (M.board_data.port or "") .. '"'
+    'fqnb = "' .. (M.board_data.fqnb or "") .. '"'
   }
   vim.fn.writefile(lines, path)
 end
