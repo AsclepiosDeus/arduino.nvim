@@ -45,7 +45,7 @@ local function board_data_detection()
   -- Query the system for connected boards
   local output = vim.fn.system('arduino-cli board list')
   for line in output:gmatch('[^\n]+') do
-    if line:match('arduino:') then
+    if line:match('[%w_]+:[%w_]+:') then
       -- Dynamic port detection: prioritizes the current physical connection
       board_data.port = line:match('^(%S+)')
 
