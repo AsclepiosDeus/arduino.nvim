@@ -61,7 +61,6 @@ The plugin generates this file in your project root to manage persistence. You c
 [board]
 core = "arduino:avr"
 fqnb = "arduino:avr:uno"
-port = "/dev/ttyACM0"
 ```
 
 ## Internal Architecture
