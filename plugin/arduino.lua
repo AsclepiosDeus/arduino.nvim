@@ -2,6 +2,8 @@
 -- License: MIT
 -- Copyright © 2026 AsclepiosDeus
 
+local arduino = require('arduino_commands')
+
 -- Command to compile the Arduino sketch
 vim.api.nvim_create_user_command('ArduinoCompile', function()
   -- Ensure FQBN is detected before compilation
