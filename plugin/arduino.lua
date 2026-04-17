@@ -63,11 +63,12 @@ end, {})
 
 
 vim.api.nvim_create_user_command('ArduinoRemote', function()
+  arduino.read_card_port()
   local path = vim.fn.expand('%:p')
 
   local lines = vim.fn.readfile(path)
   for _, line in ipairs(lines) do
-    arduino.board_data.baudrate = line:match('Serial%.begin%((%d+)%)')
+    arduino.board_data.baudrate = line:match('Serial%.begin%s*%(%s*(%d+)%s*%)')
   end
   vim.cmd('split | terminal arduino-cli monitor -p ' .. arduino.board_data.port .. ' --config baudrate=' .. arduino.board_data.baudrate)
 end, {})

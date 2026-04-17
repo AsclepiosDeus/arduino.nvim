@@ -5,7 +5,7 @@
 local M = {}
 
 -- Store active board details: Fully Qualified Board Name (FQBN), Core platform, and Serial Port
-M.board_data = { fqbn = nil, core = nil, port = nil }
+M.board_data = { fqbn = nil, core = nil, port = nil, baudrate = nil }
 
 -- Initialize the autocommand group for Arduino-specific events
 local arduino_group = vim.api.nvim_create_augroup('arduinoConfig', { clear = true })
