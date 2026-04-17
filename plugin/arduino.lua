@@ -22,7 +22,7 @@ end, {})
 -- Command to upload the compiled sketch to the board
 vim.api.nvim_create_user_command('ArduinoUpload', function()
   -- Refresh port status to handle dynamic USB reassignment
-  arduino.board_port_detection()
+  arduino.read_card_poart()
 
   if not arduino.board_data.port or arduino.board_data.port == "" then
     print('Error :: No cards detecteds')
