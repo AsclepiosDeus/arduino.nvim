@@ -22,7 +22,7 @@ end, {})
 -- Command to upload the compiled sketch to the board
 vim.api.nvim_create_user_command('ArduinoUpload', function()
   -- Refresh port status to handle dynamic USB reassignment
-  arduino.read_card_poart()
+  arduino.read_card_port()
 
   if not arduino.board_data.port or arduino.board_data.port == "" then
     print('Error :: No cards detecteds')
@@ -46,4 +46,28 @@ vim.api.nvim_create_user_command('ArduinoCoreInstall', function()
   -- Run the arduino-cli core install command
   vim.cmd('!arduino-cli core install ' .. arduino.board_data.core)
 
+end, {})
+
+
+vim.api.nvim_create_user_command('ArduinoCoreUninstall', function()
+  if arduino.board_data.core == nil then   arduino.board_data_detection() end
+  if arduino.board_data.core == nil then
+    print('Error :: No cards detecteds')
+    return
+  else arduino.save_card_data() end
+
+  -- Run the arduino-cli core install command
+  vim.cmd('!arduino-cli core uninstall ' .. arduino.board_data.core)
+
+end, {})
+
+
+vim.api.nvim_create_user_command('ArduinoRemote', function()
+  local path = vim.fn.expand('%:p')
+
+  local lines = vim.fn.readfile(path)
+  for _, line in ipairs(lines) do
+    arduino.data_board.baudrate = line:match('Serial%.begin%((%d+)%)')
+  end
+  vim.cmd('split | terminal arduino-cli monitor -p ' .. arduino.board_data.port .. ' --config baudrate=' .. arduino.data_board.baudrate)
 end, {})
