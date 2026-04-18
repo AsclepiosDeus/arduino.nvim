@@ -72,9 +72,6 @@ vim.api.nvim_create_user_command('ArduinoRemote', function()
     if baud then
       local baudrate = baud
       vim.cmd('split | terminal arduino-cli monitor -p ' .. arduino.board_data.port .. ' --config baudrate=' .. baudrate)
-    else
-      print('Error :: No Baudrate Detected')
-      return
     end
   end
 end, {})
