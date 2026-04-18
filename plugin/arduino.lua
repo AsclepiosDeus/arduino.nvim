@@ -68,10 +68,10 @@ vim.api.nvim_create_user_command('ArduinoRemote', function()
 
   local lines = vim.fn.readfile(path)
   for _, line in ipairs(lines) do
-     local baud = line:match('Serial%.begin%s*%(%s*(%d+)%s*%)')
+    local baud = line:match('Serial%.begin%s*%(%s*(%d+)%s*%)')
+    if baud then
+      local baudrate = baud
+      print('baudrate = ' .. baudrate)
+    end
   end
-  if baud then
-    arduino.board_data.baudrate = baud
-  end
-  print('baudrate = ' .. baudrate)
 end, {})
